@@ -1,6 +1,6 @@
 import { Cortex } from './cortexLib_20211122.js'
     let emotiv = {};
-    let SOCKET_URL = "wss://localhost:6868";
+    let SOCKET_URL = "wss://localhost:7070";
     emotiv.client = new Cortex(SOCKET_URL);
 
     //listen event from omni
