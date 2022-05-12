@@ -1,0 +1,84 @@
+body {
+	color: #383838;
+	background-color: #b2b2b2;
+}
+input {
+	margin: 10px;
+}
+
+p {
+	margin:  0em 1em 0em 0em;
+}
+
+#gl {
+	background-color: #808080;
+}
+
+#preamble {
+	width: 600px;
+	margin-top: 50px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#box {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	display: none;
+	z-index: 100;
+}
+
+.canvas_wrapper {
+	display: none;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+}
+
+#score_txt {
+	position: absolute;
+	top: 60px;
+}
+
+#speed_txt {
+	position: absolute;
+	top: 120px;
+}
+
+.canvas_text {
+	left: 70%;
+	width: 260px;
+	height: 60px;
+	font-family: "helvetica";
+	padding: 0px 10px 0px 10px;
+	font-size: 45px;
+	background-color: rgba(255, 255, 255, 0.05);
+	z-index: 212;
+}
+
+#results {
+	position: absolute;
+	top: 35%;
+	left: 100px;
+}
+
+#messages {
+	position: absolute;
+	top: 100px;
+	left: 100px;
+}
+
+.instructions {
+	display: none;
+	font-size: 32px;
+	font-family: "helvetica";
+	background-color: rgba(255, 255, 255, 0.0);
+	z-index: 211;
+}
+
+#goto_experiment {
+	cursor: pointer;
+}
