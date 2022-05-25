@@ -32,8 +32,6 @@ class Cortex {
                 try {
                     let data = event.data
                     if(JSON.parse(data)['id']==QUERY_HEADSET_ID){
-                        // console.log(data)
-                        // console.log(JSON.parse(data)['result'].length)
                         if(JSON.parse(data)['result'].length > 0){
                             let headsetId = JSON.parse(data)['result'][0]['id']
                             resolve(headsetId)
@@ -43,7 +41,6 @@ class Cortex {
                             if (ele != undefined) {
                                 ele.innerHTML = "No headset connected";
                             }
-                            console.log('No have any headset, please connect headset with your pc.')
                         }
                     }
                     
@@ -67,7 +64,6 @@ class Cortex {
                 "id": REQUEST_ACCESS_ID
             }
 
-            // console.log('start send request: ',requestAccessRequest)
             socket.send(JSON.stringify(requestAccessRequest));
             socket.onmessage = function(event) {
                 try {
