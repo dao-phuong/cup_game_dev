@@ -91,7 +91,6 @@ class Cortex {
                 "id": REQUEST_ACCESS_ID
             }
 
-            // console.log('start send request: ',requestAccessRequest)
             socket.send(JSON.stringify(requestAccessRequest));
 
             socket.onmessage = function(event) {
@@ -173,7 +172,6 @@ class Cortex {
         return new Promise(function(resolve, reject){
             socket.send(JSON.stringify(createSessionRequest));
             socket.onmessage = function(event) {
-                // console.log(data)
                 try {
                     let data = event.data;
                     if(JSON.parse(data)['id']==CREATE_SESSION_ID){
@@ -203,15 +201,12 @@ class Cortex {
         if (subject_name.length > 0) {
             createRecordRequest.params.subjectName = subject_name;
         }
-        console.log(createRecordRequest);
         return new Promise(function(resolve, reject){
             socket.send(JSON.stringify(createRecordRequest));
             socket.onmessage = function(event) {
                 try {
                     let data = event.data;
                     if(JSON.parse(data)['id']==CREATE_RECORD_REQUEST_ID){
-                        console.log('CREATE RECORD RESULT --------------------------------')
-                        console.log(data)
                         resolve(data)
                     }
                 } catch (error) {}
@@ -233,15 +228,12 @@ class Cortex {
                 "time": time
             }
         }
-        console.log(updateMarkerRequest)
         return new Promise(function(resolve, reject){
             socket.send(JSON.stringify(updateMarkerRequest));
             socket.onmessage = function(event) {
                 try {
                     let data = JSON.parse(event.data);
                     if(data['id']==UPDATE_MARKER_REQUEST_ID){
-                        console.log('UPDATE MARKER RESULT --------------------------------')
-                        console.log(data)
                         resolve(data)
                     }
                 } catch (error) {}
@@ -265,15 +257,12 @@ class Cortex {
                 "time": time
             }
         }
-        console.log(injectMarkerRequest)
         return new Promise(function(resolve, reject){
             socket.send(JSON.stringify(injectMarkerRequest));
             socket.onmessage = function(event) {
                 try {
                     let data = JSON.parse(event.data);
                     if(data['id']==INJECT_MARKER_REQUEST_ID){
-                        console.log('INJECT MARKER RESULT --------------------------------')
-                        console.log(data)
                         resolve(data)
                     }
                 } catch (error) {
@@ -298,15 +287,12 @@ class Cortex {
                 "extras": extras
             }
         }
-        console.log(updateMarkerRequest)
         return new Promise(function(resolve, reject){
             socket.send(JSON.stringify(updateMarkerRequest));
             socket.onmessage = function(event) {
                 try {
                     let data = JSON.parse(event.data);
                     if(data['id']==UPDATE_MARKER_REQUEST_ID){
-                        console.log('UPDATE WITH EXTRAS MARKER RESULT --------------------------------')
-                        console.log(data)
                         resolve(data)
                     }
                 } catch (error) {}
@@ -332,8 +318,6 @@ class Cortex {
                 try {
                     let data = JSON.parse(event.data);
                     if(data['id']==QUERY_SESSIONS_REQUEST_ID){
-                        console.log('QUERY SESSIONS RESULT --------------------------------')
-                        console.log(data)
                         resolve(data)
                     }
                 } catch (error) {
@@ -363,8 +347,6 @@ class Cortex {
                 try {
                     let data = event.data;
                     if(JSON.parse(data)['id']==STOP_RECORD_REQUEST_ID){
-                        console.log('STOP RECORD RESULT --------------------------------')
-                        console.log(data)
                         resolve(data)
                     }
                 } catch (error) {}
@@ -389,7 +371,6 @@ class Cortex {
         let ctResult=""
         await this.controlDevice(headsetId).then((result)=>{ctResult=result})
         this.ctResult = ctResult
-        console.log(ctResult)
 
         if (this.authToken === undefined){
             let authToken=""
@@ -409,18 +390,6 @@ class Cortex {
         this.sessionId = sessionId
         // let recordId = "";
         // await this.startRecord(document.title).then((result)=>recordId=result);
-        // console.log("recordId " + recordId);
-        console.log('HEADSET ID -----------------------------------')
-        console.log(this.headsetId)
-        console.log('\r\n')
-        console.log('CONNECT STATUS -------------------------------')
-        console.log(this.ctResult)
-        console.log('\r\n')
-        console.log('AUTH TOKEN -----------------------------------')
-        console.log('\r\n')
-        console.log('SESSION ID -----------------------------------')
-        console.log(this.sessionId)
-        console.log('\r\n')
         return new Promise(resolve => {
             setTimeout(() => {
                 resolve(this.sessionId);
@@ -446,7 +415,6 @@ class Cortex {
         if (sessionId == "") {
             await this.createSession(this.headsetId).then((result)=>{sessionId=result})
         }
-        console.log("set session id");
         this.sessionId = sessionId
     }
 
@@ -468,8 +436,6 @@ class Cortex {
             alert('You must login on EmotivApp before request for grant access then rerun')
             throw new Error('You must login on EmotivApp before request for grant access')
         }else{
-            console.log(accessGranted['result']['message'])
-            // console.log(accessGranted['result'])
             if(accessGranted['result']['accessGranted']){
                 await this.querySessionInfo()
             }
@@ -494,7 +460,6 @@ class Cortex {
             this.subRequest(streams, this.sessionId)
             this.socket.on('message', (data)=>{
                 // log stream data to file or console here
-                console.log(data)
             })
         })
     }
@@ -524,9 +489,6 @@ class Cortex {
                 try {
                     if(JSON.parse(data)['id']==SETUP_PROFILE_ID){
                         if(JSON.parse(data)['result']['action']==status){
-                            console.log('SETUP PROFILE -------------------------------------')
-                            console.log(data)
-                            console.log('\r\n')
                             resolve(data)
                         }
                     }
@@ -556,7 +518,6 @@ class Cortex {
             socket.on('message', (data)=>{
                 try {
                     if(JSON.parse(data)['id']==QUERY_PROFILE_ID){
-                        // console.log(data)
                         resolve(data)
                     }
                 } catch (error) {
@@ -584,7 +545,6 @@ class Cortex {
             await this.setupProfile(this.headsetId, 
                                     profileName, 
                                     status).then((result)=>{loadProfileResult=result})
-            console.log(loadProfileResult)
 
             // // sub 'com' stream and view live mode
             this.subRequest(['com'], this.sessionId)
