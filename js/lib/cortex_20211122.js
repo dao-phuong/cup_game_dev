@@ -5,7 +5,6 @@ import { Cortex } from './cortexLib_20211122.js'
 
     //listen event from omni
     window.addEventListener('message', function(event) {
-        console.log("event receive message from labs ", event);
         if (event.data && event.data.headsets) {
             emotiv.client.authToken = event.data.auth;
             emotiv.client.headsetId = event.data.headsets[0];
@@ -30,7 +29,6 @@ import { Cortex } from './cortexLib_20211122.js'
         await emotiv.client.querySessions().then((resp) => {
             if (resp.result.length > 0) {
                 sessionId = resp.result[0].id;
-                console.log("Retrieved Session " + sessionId);
             }
         }, (err) => {
             console.log("ERROR GETTING session: " + err);
@@ -38,17 +36,14 @@ import { Cortex } from './cortexLib_20211122.js'
         if (sessionId === "") {
             await emotiv.client.createSession(this.headsetId).then((result)=>{
                 sessionId=result;
-                console.log("createSession Result " + result);
             }, (err)=>{
                 console.log("ERROR in creating session");
             });
-            console.log("Created Session? " + sessionId);
         }
         this.sessionId = sessionId;
         if (all_id !== undefined) {
             all_id.style.cursor = 'none';
         }
-        console.log("Finished Setup");
     }
 
 
