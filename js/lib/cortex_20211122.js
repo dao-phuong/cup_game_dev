@@ -74,7 +74,6 @@ import { Cortex } from './cortexLib_20211122.js'
                 emotiv.client.sendStopMarker(emotiv.run_marker_id, time)
             } else {
                 const stopInvertal = setInterval(() => {
-                    console.log('stop invertal', emotiv.run_marker_id);
                     if (emotiv.run_marker_id) {
                         emotiv.client.sendStopMarker(emotiv.run_marker_id, time);
                         emotiv.run_marker_id = undefined;
@@ -117,13 +116,10 @@ import { Cortex } from './cortexLib_20211122.js'
     }
 
     emotiv.startRecord = function(title='title', subject_name='', description='') {
-        console.log('markers_sent', markers_sent)
-        console.log('markers_set', markers_set)
         if (emotiv.client){
             return emotiv.client.startRecord(title, subject_name, description)
                 .then((s) => {
                     console.log('Record started');
-                    console.log(s);
                 }, (err) => {
                     console.log('Problem starting record', err)
             });
@@ -131,13 +127,10 @@ import { Cortex } from './cortexLib_20211122.js'
     }
 
     emotiv.closeRecord = function() {
-        console.log('markers_sent', markers_sent)
-        console.log('markers_set', markers_set)
         if (emotiv.client){
             return emotiv.client.stopRecord()
                 .then((s) => {
-                    console.log('Finished');
-                    console.log(s);
+
                 }, (err) => {
                     console.log('Problem closing session', err)
             });
