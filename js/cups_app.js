@@ -88,7 +88,7 @@ experiment.initExperiment = function() {
   speed_ele.innerHTML = rotation_speed.toFixed(1);
 
   let step_val = parseFloat(getUrlParam("step_val", '0.5'));
-  let n_games = parseInt(getUrlParam("n_games", '3'));
+  let n_games = parseInt(getUrlParam("n_games", '1'));
   let swap_time = parseInt(getUrlParam("swap_time", '10'));
   let game_count = 0;
   var raise_speed = 2.0
