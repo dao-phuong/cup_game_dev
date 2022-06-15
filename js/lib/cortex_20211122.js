@@ -145,7 +145,9 @@ import { Cortex } from './cortexLib_20211122.js'
         setTimeout(() => {
             window.parent.postMessage({"data": "webapp finished"}, emotiv.origin);
         }, 2000)
-        window.parent.postMessage({"data": "psychopy finished"}, emotiv.origin);
+        setTimeout(() => {
+            window.parent.postMessage({"data": "psychopy finished"}, emotiv.origin);
+        }, 2500)
     }
 
 export { emotiv };
