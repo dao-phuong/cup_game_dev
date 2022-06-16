@@ -138,7 +138,7 @@ import { Cortex } from './cortexLib_20211122.js'
     }
 
     emotiv.endExperiment = () => {
-        console.log('emotiv.endExperiment call')
+        console.log('emotiv.endExperiment call', emotiv.origin)
         window.parent.postMessage({"data": "psychopy finished"}, emotiv.origin);
 
     }
