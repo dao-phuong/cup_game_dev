@@ -10,7 +10,7 @@ import { Cortex } from './cortexLib_20211122.js'
             emotiv.client.headsetId = event.data.headsets[0];
             emotiv.client.sessionId = event.data.session_id[0];
         }
-
+        console.log('web app event', event.origin);
         emotiv.origin = event.origin;
     });
 
